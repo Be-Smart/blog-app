@@ -1,6 +1,11 @@
-const GuestController = require('./controllers/guest_controller');
+const PostsController = require('./controllers/posts_controller');
 
 module.exports = (app) => {
-  app.get('/', GuestController.allPosts);
-  app.get('/post/:id', GuestController.getPost);
+  app.get('/', PostsController.allPosts);
+
+  app.get('/post/:id', PostsController.getPost);
+  app.put('/post/:id', PostsController.edit);
+  app.delete('/post/:id', PostsController.remove);
+
+  app.post('/post/new', PostsController.create);
 };
