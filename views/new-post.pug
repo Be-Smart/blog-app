@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div
+    .link-wrap
+      a(href='/') Back
+
+    h1 Create a new blog post
+    form(method='post')
+      label(for='id') Post title
+      input(type='text' name='title' placeholder='Post title' id='title')
+      label(for='content') Post content
+      textarea(name='content' placeholder='Content' id='content')
+      button(type='submit') Submit
