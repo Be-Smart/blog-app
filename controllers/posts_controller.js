@@ -11,6 +11,7 @@ module.exports = {
   },
 
   getPost(req, res) {
+    console.log(req.user);
     const postId = req.params.id;
 
     BlogPost.findOne({_id: postId})
@@ -18,12 +19,18 @@ module.exports = {
         const { title, content } = post;
         const createdAt = moment(post.createdAt).format('MMM, Do, YYYY');
 
-        res.render('post', {title, content, createdAt, postId});
+        res.render('post', {title, content, createdAt, postId, isAuth: req.isAuthenticated()});
       })
   },
 
   newPost(req, res) {
-    res.render('new-post', {title: 'Create new blog post'});
+    console.log(req.isAuthenticated());
+
+    if (req.isAuthenticated()) {
+      res.render('new-post', {title: 'Create new blog post'});
+      return;
+    }
+    res.redirect('/login');
   },
 
   create(req, res) {
