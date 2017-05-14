@@ -28,6 +28,6 @@ module.exports = (app) => {
   //   User.create(req.body)
   //     .then((user) => {
   //       res.send(user);
-  //     })
+  //     }).catch(err => console.log(err));
   // });
 };

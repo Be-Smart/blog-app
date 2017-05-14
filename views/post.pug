@@ -1,10 +1,9 @@
 extends layout
 
 block nav
-  if isAuth
-    ul
-      li: a(href=`/post/edit/${postId}`) Edit post
-      li: a(href=`/post/delete/${postId}`) Delete post
+  ul
+    li: a(href=`/post/edit/${postId}`) Edit post
+    li: a(href=`/post/delete/${postId}`) Delete post
 
 block content
   .wrap

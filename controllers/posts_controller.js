@@ -19,18 +19,18 @@ module.exports = {
         const { title, content } = post;
         const createdAt = moment(post.createdAt).format('MMM, Do, YYYY');
 
-        res.render('post', {title, content, createdAt, postId, isAuth: req.isAuthenticated()});
+        res.render('post', {title, content, createdAt, postId});
       })
   },
 
   newPost(req, res) {
-    console.log(req.isAuthenticated());
+    // console.log(req.isAuthenticated());
 
-    if (req.isAuthenticated()) {
-      res.render('new-post', {title: 'Create new blog post'});
-      return;
-    }
-    res.redirect('/login');
+    res.render('new-post', {title: 'Create new blog post'});
+    // if (req.isAuthenticated()) {
+      // return;
+    // }
+    // res.redirect('/login');
   },
 
   create(req, res) {
