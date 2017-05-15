@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 const passport = require('passport');
 // const session = require('express-session');
-require('./services/passport');
+// require('./services/passport');
 
 const app = express();
 
