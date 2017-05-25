@@ -1,7 +1,10 @@
 extends layout
 
 block nav
-  a(href='/post/create/new') New post
+  if isAdmin
+    ul
+      li: a(href='/admin/create/new') New post
+      li: a(href='/logout') Log out
 
 block content
   ul

@@ -23,16 +23,12 @@ UserSchema.pre('save', function(next) {
   })
 });
 
-UserSchema.methods.comparePassword = function(candidatePass, callback) {
+UserSchema.methods.comparePassword = function(candidatePass) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(candidatePass, this.password)
       .then(isMatch => resolve(isMatch))
       .catch(err => reject(err));
   });
-
-  // bcrypt.compare(candidatePass, this.password)
-  //   .then(isMatch => callback(null, isMatch))
-  //   .catch(err => callback(err));
 }
 
 const User = mongoose.model('user', UserSchema);
