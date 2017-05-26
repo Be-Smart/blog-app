@@ -1,5 +1,6 @@
 const BlogPost = require('../models/blogPost');
 const moment = require('moment');
+const marked = require('marked');
 
 module.exports = {
 
@@ -18,7 +19,8 @@ module.exports = {
 
     BlogPost.findOne({_id: postId})
       .then(post => {
-        const { title, content } = post;
+        const { title, content: mdContent } = post;
+        const content = marked(mdContent);
         const createdAt = moment(post.createdAt).format('MMM, Do, YYYY');
 
         res.render('post', {title, content, createdAt, postId, isAdmin });
