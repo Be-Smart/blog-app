@@ -17,6 +17,7 @@
     "express": "^4.15.2",
     "express-session": "^1.15.3",
     "jwt-simple": "^0.5.1",
+    "marked": "^0.3.6",
     "moment": "^2.18.1",
     "mongoose": "^4.9.7",
     "nodemon": "^1.11.0",
