@@ -7,33 +7,18 @@ const passport = require('passport');
 
 const requireSignin = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
 });
 
 module.exports = (app) => {
   app.get('/', PostsController.allPosts);
   app.get('/post/:id', PostsController.getPost);
 
-  app.get('/admin/create/new',
-   AuthController.requireAuth,
-   AdminController.newPost
-  );
-  app.post('/admin/create/new',
-   AuthController.requireAuth,
-   AdminController.create
-  );
-  app.get('/admin/edit/:id',
-   AuthController.requireAuth,
-   AdminController.editPage
-  );
-  app.post('/admin/edit/:id',
-   AuthController.requireAuth,
-   AdminController.edit
-  );
-  app.get('/admin/delete/:id',
-   AuthController.requireAuth,
-   AdminController.remove
-  );
+  app.get('/admin/create/new', AuthController.requireAuth, AdminController.newPost);
+  app.post('/admin/create/new', AuthController.requireAuth, AdminController.create);
+  app.get('/admin/edit/:id', AuthController.requireAuth, AdminController.editPage);
+  app.post('/admin/edit/:id', AuthController.requireAuth, AdminController.edit);
+  app.get('/admin/delete/:id', AuthController.requireAuth, AdminController.remove);
 
   app.get('/login', AuthController.loginView);
   app.post('/login', requireSignin);

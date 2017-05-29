@@ -3,12 +3,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
 const localLogin = new LocalStrategy((username, password, done) => {
-  User.findOne({email: username})
-    .then(user => {
+  User.findOne({ email: username })
+    .then((user) => {
       if (!user) { return done(null, false); }
 
       user.comparePassword(password)
-        .then(isMatch => {
+        .then((isMatch) => {
           if (!isMatch) { return done(null, false); }
           return done(null, user);
         })
@@ -18,7 +18,8 @@ const localLogin = new LocalStrategy((username, password, done) => {
 });
 
 passport.serializeUser((user, done) => {
-  done(null, user._id);
+  const { _id: userId } = user;
+  done(null, userId);
 });
 
 passport.deserializeUser((id, done) => {

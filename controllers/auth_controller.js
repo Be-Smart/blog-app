@@ -1,9 +1,7 @@
-const passport = require('passport');
-const User = require('../models/user');
 
 module.exports = {
   loginView(req, res) {
-    res.render('login', {title: 'Login'});
+    res.render('login', { title: 'Login' });
   },
 
   logout(req, res) {
@@ -13,6 +11,6 @@ module.exports = {
 
   requireAuth(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login');
-  }
+    return res.redirect('/login');
+  },
 };
