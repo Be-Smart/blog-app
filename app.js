@@ -25,8 +25,8 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 60 * 60
-  })
+    ttl: 60 * 60,
+  }),
 }));
 app.use(passport.initialize());
 app.use(passport.session());

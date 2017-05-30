@@ -1,3 +1,4 @@
+/* eslint consistent-return: 0*/
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
