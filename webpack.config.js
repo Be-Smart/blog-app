@@ -4,20 +4,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
   filename: '[name].css',
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV !== 'production',
 });
 
 module.exports = {
   context: path.join(__dirname, 'client'),
 
   entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './main' //eslint-disable-line
   ],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: '[name].js',
   },
 

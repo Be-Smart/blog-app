@@ -23,7 +23,9 @@ if (process.env.NODE_ENV !== 'production') {
 
   const compiler = webpack(webpackConfig);
 
-  app.use(webpackMiddleware(compiler));
+  app.use(webpackMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+  }));
   app.use(webpackHotMiddleware(compiler, {
     path: '/__webpack_hmr', heartbeat: 10 * 1000,
   }));

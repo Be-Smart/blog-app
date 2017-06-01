@@ -1,7 +1,8 @@
+// import app from './app';
 import './main.sass';
 
-// console.log('hello!');
+// console.log('qwerty');
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
+if (module.hot) {
+  module.hot.accept();
+}
