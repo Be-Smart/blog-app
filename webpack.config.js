@@ -2,18 +2,17 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const devEnv = process.env.NODE_ENV === 'development';
+
 const extractSass = new ExtractTextPlugin({
   filename: '[name].css',
-  disable: process.env.NODE_ENV !== 'production',
+  disable: devEnv,
 });
 
 module.exports = {
   context: path.join(__dirname, 'client'),
 
-  entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    './main' //eslint-disable-line
-  ],
+  entry: ['./main'],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -41,9 +40,23 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    extractSass,
+  plugins: [extractSass],
+};
+
+if (devEnv) {
+  module.exports.entry.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000');
+  module.exports.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin() // eslint-disable-line
-  ],
-};
+  );
+}
+
+if (!devEnv) {
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      unused: true,
+      dead_code: true,
+      warnings: false,
+    }) // eslint-disable-line
+  );
+}

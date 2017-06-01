@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/blogApp');
 
 app.set('view engine', 'pug');
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const webpackMiddleware = require('webpack-dev-middleware'); // eslint-disable-line
   const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
   const webpack = require('webpack'); // eslint-disable-line
