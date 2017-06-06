@@ -8,10 +8,16 @@ block nav
       li: a(href='/logout') Log out
 
 block content
-  .wrap
+  section.post__wrapper
+
     .link-wrap
       a(href='/') Back
-    h1= title
-    .info
-      span= createdAt
-    .content!= content
+
+    h1.post__title= title
+
+    .post__info
+      span.post__author Serhii Vladymyrov
+      span |
+      span.post__date= createdAt
+
+    .post__content!= content
