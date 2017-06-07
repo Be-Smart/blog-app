@@ -2,16 +2,17 @@ extends layout
 
 block nav
   if isAdmin
-    ul
-      li: a(href=`/admin/edit/${postId}`) Edit post
-      li: a(href=`/admin/delete/${postId}`) Delete post
-      li: a(href='/logout') Log out
+    ul.navigation
+      li.navigation__item: a(href='/').navigation__link Home
+      li.navigation__item: a(href='/admin/create/new').navigation__link New post
+      li.navigation__item: a(href=`/admin/edit/${postId}`).navigation__link Edit post
+      li.navigation__item: a(href=`/admin/delete/${postId}`).navigation__link Delete post
+      li.navigation__item: a(href='/logout').navigation__link Log out
 
 block content
   section.post__wrapper
 
-    .link-wrap
-      a(href='/') Back
+    a(href='/').go-back Go Back
 
     h1.post__title= title
 
