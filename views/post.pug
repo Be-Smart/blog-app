@@ -1,18 +1,33 @@
 extends layout
 
+
 block nav
+  - const backBtn = isAdmin ? 'go-back top' : 'go-back'
+
   if isAdmin
-    ul.navigation
-      li.navigation__item: a(href='/').navigation__link Home
-      li.navigation__item: a(href='/admin/create/new').navigation__link New post
-      li.navigation__item: a(href=`/admin/edit/${postId}`).navigation__link Edit post
-      li.navigation__item: a(href=`/admin/delete/${postId}`).navigation__link Delete post
-      li.navigation__item: a(href='/logout').navigation__link Log out
+    header
+      ul.navigation
+        li.navigation__item
+          a(href='/admin/create/new').navigation__link
+            span.link__icon: img(src='../assets/icons/new.svg')
+            span.link__text New
+        li.navigation__item
+          a(href=`/admin/edit/${postId}`).navigation__link
+            span.link__icon: img(src='../assets/icons/edit.svg')
+            span.link__text Edit
+        li.navigation__item
+          a(href=`/admin/delete/${postId}`).navigation__link
+            span.link__icon: img(src='../assets/icons/delete.svg')
+            span.link__text Delete
+        li.navigation__item
+          a(href='/logout').navigation__link
+            span.link__icon: img(src='../assets/icons/logout.svg')
+            span.link__text Log out
 
 block content
   section.post__wrapper
 
-    a(href='/').go-back Go Back
+    a(href='/' class=`${backBtn}`) Go Back
 
     h1.post__title= title
 

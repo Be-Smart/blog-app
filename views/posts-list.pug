@@ -2,9 +2,16 @@ extends layout
 
 block nav
   if isAdmin
-    ul
-      li: a(href='/admin/create/new') New post
-      li: a(href='/logout') Log out
+    header
+      ul.navigation
+        li.navigation__item
+          a(href='/admin/create/new').navigation__link
+            span.link__icon: img(src='../assets/icons/new.svg')
+            span.link__text New
+        li.navigation__item
+          a(href='/logout').navigation__link
+            span.link__icon: img(src='../assets/icons/logout.svg')
+            span.link__text Log out
 
 block content
   section.post
