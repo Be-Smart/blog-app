@@ -3,8 +3,8 @@ extends layout
 block nav
   if isAdmin
     header
-      ul.navigation
-        li.navigation__item
+      ul.navigation.home
+        li.navigation__item.home
           a(href='/admin/create/new').navigation__link
             span.link__icon: img(src='../assets/icons/new.svg')
             span.link__text New

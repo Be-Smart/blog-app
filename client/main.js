@@ -4,18 +4,30 @@ import './assets/icons/edit.svg';
 import './assets/icons/logout.svg';
 import './assets/icons/new.svg';
 
+const dispatchCustomEvent = (type, name, obj = global.window) => {
+  let running = false;
+  const func = () => {
+    if (running) { return; }
+    running = true;
+    global.requestAnimationFrame(() => {
+      obj.dispatchEvent(new global.CustomEvent(name));
+      running = false;
+    });
+  };
+  obj.addEventListener(type, func);
+};
+
 const toggleHidden = (domElement, className) => {
   let lastScrollTop = 0;
   return () => {
     const delta = 5;
-    const btnHeight = domElement.offsetHeight;
     const st = global.document.body.scrollTop;
     const viewportHeight = global.window.innerHeight;
     const documentHeight = global.document.body.offsetHeight;
 
     if (Math.abs(lastScrollTop - st) <= delta) { return; }
 
-    if (st > lastScrollTop && st > btnHeight) {
+    if (st > lastScrollTop) {
       domElement.classList.add(className);
     } else if (st + viewportHeight < documentHeight) {
       domElement.classList.remove(className);
@@ -25,39 +37,33 @@ const toggleHidden = (domElement, className) => {
   };
 };
 
-const scrollListener = (callback) => {
-  let didScroll = false;
-  return (ms) => {
-    global.window.addEventListener('scroll', () => {
-      didScroll = true;
-    });
-
-    setInterval(() => {
-      if (didScroll) {
-        callback();
-        didScroll = false;
-      }
-    }, ms);
-  };
-};
-
 const btn = global.document.querySelector('.go-back');
 const header = global.document.querySelector('header');
 const btnClass = btn && header ? 'nav__up' : 'nav__down';
+const toggleHeader = toggleHidden(header, 'nav__down');
+const toggleButton = toggleHidden(btn, btnClass);
 
-if (header) {
-  scrollListener(toggleHidden(header, 'nav__down'))(250);
-}
+const onWindowScroll = () => {
+  const condition = global.window.innerWidth < 985;
+  if (condition && header) { toggleHeader(); }
+  if (condition && btn) { toggleButton(); }
+};
 
-if (btn) {
-  scrollListener(toggleHidden(btn, btnClass))(250);
-}
+const onWindowResize = () => {
+  const condition = global.window.innerWidth > 985;
+  if (condition && header) {
+    header.classList.remove('nav__down');
+  }
+  if (condition && btn) {
+    btn.classList.remove(btnClass);
+  }
+};
 
-// if (btn && header) {
-//   scrollListener(toggleHidden(btn, 'nav__up'))(250);
-// } else if (btn && !header) {
-//   scrollListener(toggleHidden(btn, 'nav__down'))(250);
-// }
+dispatchCustomEvent('scroll', 'optimizedScroll');
+dispatchCustomEvent('resize', 'optimizedResize');
+
+global.window.addEventListener('optimizedScroll', () => onWindowScroll());
+global.window.addEventListener('optimizedResize', () => onWindowResize());
 
 if (module.hot) {
   module.hot.accept();

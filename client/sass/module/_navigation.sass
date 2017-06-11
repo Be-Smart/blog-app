@@ -2,10 +2,28 @@
   display: flex
   justify-content: space-around
   padding: 5px 10px
+  +breakpoint($xs)
+    justify-content: space-between
+    width: 450px
+    margin: auto
+    &.home
+      justify-content: center
+  +breakpoint($md)
+    width: initial
+    flex-direction: column
 
-// .navigation__item
-//   display: flex
-//   flex-direction: column
+.navigation__item
+  +breakpoint($xs)
+    &.home
+      margin-right: 45px
+      &:last-child
+        margin-right: 0
+  +breakpoint($md)
+    margin-bottom: 10px
+    &:last-child
+      margin-bottom: 0
+    &.home
+      margin-right: 0
 
 .navigation__link
   display: flex
@@ -38,11 +56,37 @@
   transform: translateX(-50%)
   font-weight: bold
   transition: bottom 0.2s ease-in-out
+  display: flex
+  &:hover
+    svg
+      fill: $brown
+  +breakpoint($md)
+    left: 20px
+    bottom: initial
+    top: 20px
+    transform: none
+    transition: initial
+    background-color: initial
+    padding: 0
+    border-radius: initial
+    box-shadow: initial
+
+.nav__icon-wrap
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin-right: 5px
+  padding-top: 2px
+
+.nav__icon
+  fill: $red
 
 .top
   bottom: initial
   top: 0
   transition: top 0.2s ease-in-out
+  +breakpoint($md)
+    top: 20px
 
 .nav__up
   top: -100px
