@@ -5,6 +5,8 @@ const { Schema } = mongoose;
 const BlogPostSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
+  author: { type: Schema.ObjectId, ref: 'user', required: true },
+  tags: [{ type: String, required: true }],
   createdAt: { type: Date, default: new Date() },
   updatedAt: { type: Date, default: new Date() },
 });

@@ -1,6 +1,5 @@
 const BlogPost = require('../models/blogPost');
-const moment = require('moment');
-const marked = require('marked');
+const User = require('../models/user');
 
 module.exports = {
 
@@ -19,11 +18,8 @@ module.exports = {
 
     BlogPost.findOne({ _id: postId })
       .then((post) => {
-        const { title, content: mdContent } = post;
-        const content = marked(mdContent);
-        const createdAt = moment(post.createdAt).format('MMM, Do, YYYY');
-
-        res.render('post', { title, content, createdAt, postId, isAdmin });
+        User.findOne({ _id: post.author })
+          .then(user => res.render('post', { post, author: user.name, postId, isAdmin }));
       });
   },
 

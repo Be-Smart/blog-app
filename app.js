@@ -42,11 +42,14 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 60 * 60,
+    ttl: 60 * 60 * 3,
   }),
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.locals.moment = require('moment');
+app.locals.marked = require('marked');
 
 routes(app);
 

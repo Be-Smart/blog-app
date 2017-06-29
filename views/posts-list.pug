@@ -1,5 +1,4 @@
 extends layout
-
 block nav
   if isAdmin
     header
@@ -17,5 +16,5 @@ block content
   section.post
     each post in posts
       .post__container
-        span.post__date Jun, 5th, 2017
+        span.post__date= moment(post.createdAt).format('MMM, Do, YYYY')
         a(href=`/post/${post._id}`).post__link= post.title

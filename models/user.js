@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
 });
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) { // eslint-disable-line func-names
   const user = this;
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -25,7 +25,7 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-UserSchema.methods.comparePassword = function (candidatePass) {
+UserSchema.methods.comparePassword = function (candidatePass) { // eslint-disable-line func-names
   return new Promise((resolve, reject) => {
     bcrypt.compare(candidatePass, this.password)
       .then(isMatch => resolve(isMatch))
