@@ -11,6 +11,7 @@ module.exports = {
     const post = new BlogPost({
       title: req.body.title,
       content: req.body.content,
+      tags: req.body.tags.split(','),
     });
 
     User.findOne({ _id: authorId })
@@ -19,10 +20,6 @@ module.exports = {
         post.save().then(() => res.redirect('/'));
       })
       .catch(error => global.console.log(error));
-    // BlogPost.create(req.body)
-    //   .then(() => {
-    //     res.redirect('/');
-    //   });
   },
 
   editPage(req, res) {
